@@ -18,6 +18,7 @@ public class Log2File {
 		dir.mkdirs();
 		file = new File(dir, "log_file.txt");
 	}
+	
 	public static void init(String fileName) {
 		File sdCard = Environment.getExternalStorageDirectory();
 		File dir = new File(sdCard.getAbsolutePath() + "/Log2File/");
