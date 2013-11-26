@@ -12,6 +12,9 @@ import android.util.Log;
 public class Log2File {
 	private static File file;
 
+	/**
+	 * Init with default settings. Log file will be named "log_file.txt" and will be stored in directory named "Log2File" in root of SDCard.
+	 */
 	public static void init() {
 		File sdCard = Environment.getExternalStorageDirectory();
 		File dir = new File(sdCard.getAbsolutePath() + "/Log2File/");
