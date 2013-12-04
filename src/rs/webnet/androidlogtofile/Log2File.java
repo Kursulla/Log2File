@@ -13,7 +13,8 @@ public class Log2File {
 	private static File file;
 
 	/**
-	 * Init with default settings. Log file will be named "log_file.txt" and will be stored in directory named "Log2File" in root of SDCard.
+	 * Init with default settings. 
+	 * Log file will be named "log_file.txt" and will be stored in directory named "Log2File" in root of SDCard.
 	 */
 	public static void init() {
 		File sdCard = Environment.getExternalStorageDirectory();
@@ -22,12 +23,25 @@ public class Log2File {
 		file = new File(dir, "log_file.txt");
 	}
 	
+	/**
+	 * Init Log2File with log filename.
+	 * Directory would be default one "Log2File"
+	 * 
+	 * @param fileName file name
+	 */
 	public static void init(String fileName) {
 		File sdCard = Environment.getExternalStorageDirectory();
 		File dir = new File(sdCard.getAbsolutePath() + "/Log2File/");
 		dir.mkdirs();
 		file = new File(dir, fileName);
 	}
+	
+	/**
+	 * Init Log2File with log filename and directory.
+	 * 
+	 * @param directory path to directory
+	 * @param fileName file name
+	 */
 	public static void init(String directory, String fileName) {
 		File sdCard = Environment.getExternalStorageDirectory();
 		File dir = new File(sdCard.getAbsolutePath() + "/"+directory+"/");
@@ -36,6 +50,12 @@ public class Log2File {
 	}
 	
 	
+	/**
+	 * 
+	 * @param tag
+	 * @param data
+	 * @param file
+	 */
 	private static void writeStringToAFile(String tag, final String data, File file) {
 		long time = System.currentTimeMillis();
 		SimpleDateFormat formater = new SimpleDateFormat("HH:mm:SS  dd/MM/yyyy [Z]");
