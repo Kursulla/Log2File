@@ -82,9 +82,11 @@ public class Log2File {
 	}
 	
 	public static void log(String data){
+        Log.d("Log2File",data);
 		writeStringToAFile("Log2File", data, file);
 	}
 	public static void log(String tag, String data){
+        Log.d(tag,data);
 		writeStringToAFile(tag, data, file);
 	}
 }
