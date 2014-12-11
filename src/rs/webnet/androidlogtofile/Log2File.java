@@ -21,6 +21,7 @@ public class Log2File {
 		File dir = new File(sdCard.getAbsolutePath() + "/Log2File/");
 		dir.mkdirs();
 		file = new File(dir, "log_file.txt");
+        file.mkdir();
 	}
 	
 	/**
@@ -34,6 +35,7 @@ public class Log2File {
 		File dir = new File(sdCard.getAbsolutePath() + "/Log2File/");
 		dir.mkdirs();
 		file = new File(dir, fileName);
+        file.mkdir();
 	}
 	
 	/**
@@ -47,6 +49,7 @@ public class Log2File {
 		File dir = new File(sdCard.getAbsolutePath() + "/"+directory+"/");
 		dir.mkdirs();
 		file = new File(dir, fileName);
+        file.mkdir();
 	}
 	
 	
@@ -75,7 +78,7 @@ public class Log2File {
 		}finally{
 			try {
 				out.close();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -83,10 +86,16 @@ public class Log2File {
 	
 	public static void log(String data){
         Log.d("Log2File",data);
+        if(file == null){
+            init();
+        }
 		writeStringToAFile("Log2File", data, file);
 	}
 	public static void log(String tag, String data){
         Log.d(tag,data);
+        if(file == null){
+            init();
+        }
 		writeStringToAFile(tag, data, file);
 	}
 }
