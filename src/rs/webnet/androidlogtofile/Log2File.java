@@ -17,11 +17,7 @@ public class Log2File {
 	 * Log file will be named "log_file.txt" and will be stored in directory named "Log2File" in root of SDCard.
 	 */
 	public static void init() {
-		File sdCard = Environment.getExternalStorageDirectory();
-		File dir = new File(sdCard.getAbsolutePath() + "/Log2File/");
-		dir.mkdirs();
-		file = new File(dir, "log_file.txt");
-        file.mkdir();
+		init("log_file.txt");
 	}
 	
 	/**
@@ -31,11 +27,7 @@ public class Log2File {
 	 * @param fileName file name
 	 */
 	public static void init(String fileName) {
-		File sdCard = Environment.getExternalStorageDirectory();
-		File dir = new File(sdCard.getAbsolutePath() + "/Log2File/");
-		dir.mkdirs();
-		file = new File(dir, fileName);
-        file.mkdir();
+		init("Log2File",fileName);
 	}
 	
 	/**
@@ -49,11 +41,31 @@ public class Log2File {
 		File dir = new File(sdCard.getAbsolutePath() + "/"+directory+"/");
 		dir.mkdirs();
 		file = new File(dir, fileName);
-        file.mkdir();
+        	file.mkdir();
 	}
-	
-	
 	/**
+	 * Write to file with custom tag.
+	 * 
+	 * @param data Tag to be written in file row.
+	 * @param data Data to be written in file row.
+	 * /
+	public static void log(String tag, String data){
+        	Log.d(tag,data);
+        	if(file == null){
+            		init();
+        	}
+		writeStringToAFile(tag, data, file);
+	}
+	/**
+	 * Write to file with default tag: Log2File.
+	 * 
+	 * @param data Data to be written in file row.
+	 * /
+	public static void log(String data){
+        	log("Log2File",data);
+	}
+	/**
+	 * Methog for writing data to file.
 	 * 
 	 * @param tag
 	 * @param data
@@ -66,11 +78,8 @@ public class Log2File {
 		BufferedWriter out=null;
 		try {
 			out = new BufferedWriter(new FileWriter(file,true));
-			
 			String lineToWriteToFile = formater.format(time) + " --- " + data+"\n\r";
-			
 			out.write(lineToWriteToFile);
-			
 			Log.d("Log2File",""+data);
 			
 		} catch (IOException e) {
@@ -84,18 +93,4 @@ public class Log2File {
 		}
 	}
 	
-	public static void log(String data){
-        Log.d("Log2File",data);
-        if(file == null){
-            init();
-        }
-		writeStringToAFile("Log2File", data, file);
-	}
-	public static void log(String tag, String data){
-        Log.d(tag,data);
-        if(file == null){
-            init();
-        }
-		writeStringToAFile(tag, data, file);
-	}
 }
